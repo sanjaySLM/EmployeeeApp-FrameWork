@@ -23,6 +23,11 @@ import AddPlaceScreen, {
   screenOptions as AddplacesScreenOptions,
 } from "../screens/places/AddPlaceScreen";
 
+import FormSubmit, {
+  screenOptions as FormSubmitScreenOptions,
+} from "../screens/FormSubmit/FormSubmit";
+
+
 import EmployeeListScreen, {
   screenOptions as employeeListScreenOptions,
 } from "../screens/Employee/EmployeeListScreen";
@@ -31,10 +36,24 @@ import EditEmployeeScreen, {
   screenOptions as editEmployeeScreenOptions,
 } from "../screens/Employee/EditEmployeeScreen";
 
+import DocumentPicker, {
+  screenOptions as DocumentPickerScreenOptions,
+} from "../screens/Document/DocumentPicker";
+
+import DocumentAddScreen, {
+  screenOptions as DocumentAddScreenOptions,
+} from "../screens/Document/DocumentAddScreen";
+
+import AboutDeviceScreen, {
+  screenOptions as AboutDeviceScreenOptions,
+} from "../screens/About/AboutDeviceScreen";
+
+
 
 import { useDispatch } from "react-redux";
 import * as authActions from "../store/actions/auth";
 import Colors from "../constants/Colors";
+import PdfViewer from "../components/PdfViewer";
 
 
 
@@ -88,7 +107,7 @@ export const PlacesNavigator = props => {
         component={PlacesListScreen}
         options={placesListScreenOptions}
       />
-          <PlacesStackNavigator.Screen
+      <PlacesStackNavigator.Screen
         name="AddPlaces"
         component={AddPlaceScreen}
         options={AddplacesScreenOptions}
@@ -98,10 +117,68 @@ export const PlacesNavigator = props => {
 };
 
 
+const DocumentStackNavigator = createStackNavigator();
+
+
+export const DocumentNavigator = props => {
+
+  return (
+    <DocumentStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <DocumentStackNavigator.Screen
+        name="DocumentPicker"
+        component={DocumentPicker}
+        options={DocumentPickerScreenOptions}
+      />
+         <DocumentStackNavigator.Screen
+        name="DocumentAdd"
+        component={DocumentAddScreen}
+        options={DocumentAddScreenOptions}
+      />
+      <DocumentStackNavigator.Screen
+        name="PdfView"
+        component={PdfViewer}
+      />
+    </DocumentStackNavigator.Navigator>
+  );
+};
+
+
+
+const AboutDeviceStackNavigator = createStackNavigator();
+
+export const AboutDeviceNavigator = props => {
+
+  return (
+    <AboutDeviceStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <AboutDeviceStackNavigator.Screen
+        name="AboutDevice"
+        component={AboutDeviceScreen}
+        options={AboutDeviceScreenOptions}
+      />
+
+    </AboutDeviceStackNavigator.Navigator>
+  );
+};
 
 
 
 
+
+const FormSubmitStackNavigator = createStackNavigator();
+
+export const FormSubmitNavigator = props => {
+
+  return (
+    <FormSubmitStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <FormSubmitStackNavigator.Screen
+        name="Form"
+        component={FormSubmit}
+        options={FormSubmitScreenOptions}
+      />
+
+    </FormSubmitStackNavigator.Navigator>
+  );
+};
 
 
 
@@ -174,13 +251,52 @@ export const PhoenixAppNavigator = () => {
           ),
         }}
       />
-       <PhoenixDrawerNavigator.Screen
+      <PhoenixDrawerNavigator.Screen
         name="Places"
         component={PlacesNavigator}
         options={{
           drawerIcon: (props) => (
             <Ionicons
               name={Platform.OS === "android" ? "location" : "ios-cart"}
+              size={28}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+      <PhoenixDrawerNavigator.Screen
+        name="Documents"
+        component={DocumentNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <Ionicons
+              name={Platform.OS === "android" ? "document-attach" : "document-attach"}
+              size={28}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+        <PhoenixDrawerNavigator.Screen
+        name="About Device"
+        component={AboutDeviceNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <Ionicons
+              name={Platform.OS === "android" ? "information-circle" : "information-circle"}
+              size={28}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+      <PhoenixDrawerNavigator.Screen
+        name="Forms"
+        component={FormSubmitNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <Ionicons
+              name={Platform.OS === "android" ? "information-circle" : "information-circle"}
               size={28}
               color={props.color}
             />

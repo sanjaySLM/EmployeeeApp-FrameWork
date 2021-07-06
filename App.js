@@ -16,14 +16,16 @@ import Colors from "./constants/Colors";
 import MainNavigator from "./navigation/MainNavigator";
 import EmployeeListReducer from "./store/reducers/EmployeeList";
 import AuthReducer from './store/reducers/auth';
-import PlaceReducer from './store/reducers/Places'
+import PlaceReducer from './store/reducers/Places';
+import DocumentReducer from "./store/reducers/Document";
 
 
 
 const rootReducer = combineReducers({
   EmployeeList: EmployeeListReducer,
   Auth: AuthReducer,
-  places:PlaceReducer
+  places:PlaceReducer,
+  DocumentList: DocumentReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

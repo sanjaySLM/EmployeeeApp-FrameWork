@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FlatList, View, StyleSheet, SafeAreaView, Text, TextInput, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet,  Animated, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
@@ -7,6 +7,8 @@ import EmployeeCard from "../../components/EmployeeCard"
 import { getEmployeeDetail, searchEmployee } from "../../store/actions/EmployeeList";
 import Colors from "../../constants/Colors";
 import SearchInput from '../../components/UI/SearchInput'
+import Swipeable from "react-native-gesture-handler/Swipeable";
+
 
 const EmployeeListScren = ({ navigation }) => {
 
@@ -116,6 +118,131 @@ const EmployeeListScren = ({ navigation }) => {
       console.log('SearchCalled')
     }
   }
+ //////////////////////////////////////////////////
+
+  const RightActions = (progress, dragX, itemData) => {
+    const scale = dragX.interpolate({
+      inputRange: [-100, 0],
+      outputRange: [0.7, 0],
+    });
+    return (
+      <>
+        <TouchableOpacity>
+          <View
+            style={{
+              flex: 1,
+              padding: 5,
+              backgroundColor: Colors.secondaryColor,
+              justifyContent: "center",
+            }}
+          >
+            <Animated.View
+              style={{
+                color: "white",
+                padding: 10,
+                fontWeight: "600",
+                transform: [{ scale }],
+              }}
+            >
+              <Text style={styles.actionText}>More...</Text>
+            </Animated.View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <View
+            style={{
+              flex: 1,
+              padding: 5,
+              backgroundColor: Colors.tertiaryColor,
+              justifyContent: "center",
+            }}
+          >
+            <Animated.View
+              style={{
+                color: "white",
+                padding: 10,
+                fontWeight: "600",
+                transform: [{ scale }],
+              }}
+            >
+              <Text style={styles.actionText}>Details</Text>
+            </Animated.View>
+          </View>
+        </TouchableOpacity>
+      </>
+    );
+  };
+
+  const LeftActions = (progress, dragX, itemData) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+    });
+    return (
+      <TouchableOpacity>
+        <View
+          style={{
+            flex: 1,
+            padding: 10,
+            backgroundColor: Colors.secondaryColor,
+            justifyContent: "center",
+          }}
+        >
+          <Animated.View
+            style={{
+              color: "white",
+              padding: 10,
+              fontWeight: "600",
+              transform: [{ scale }],
+            }}
+          >
+            <Text style={styles.actionText}>More...</Text>
+          </Animated.View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  let row = [];
+  let prevOpenedRow;
+
+  const closeRow = (index) => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
+
+
+  const renderItem = (itemData) => (
+    <Swipeable
+      ref={(ref) => (row[itemData.index] = ref)}
+      renderLeftActions={(progress, dragX) => {
+        return LeftActions(progress, dragX, itemData);
+      }}
+      renderRightActions={(progress, dragX) => {
+        return RightActions(progress, dragX, itemData);
+      }}
+      onSwipeableOpen={() => {
+        closeRow(itemData.index);
+      }}
+    >
+          <EmployeeCard
+          onSelect={() => {
+            navigation.navigate("EditScreen", {
+              id: itemData.item.id
+            }
+            );
+          }}
+          name={itemData.item.name}
+          gender={itemData.item.gender}
+          salary={itemData.item.salary}
+          doj={itemData.item.dateOfJoin}
+        />
+     </Swipeable>
+  );
+
 
 
   return <SafeAreaView style={{ flex: 1 }}>
@@ -129,19 +256,20 @@ const EmployeeListScren = ({ navigation }) => {
       refreshing={isRefreshing}
       data={isSearching ? employeeDataSearched: employeeData}
       keyExtractor={item => item.id}
-      renderItem={itemData =>
-        <EmployeeCard
-          onSelect={() => {
-            navigation.navigate("EditScreen", {
-              id: itemData.item.id
-            }
-            );
-          }}
-          name={itemData.item.name}
-          gender={itemData.item.gender}
-          salary={itemData.item.salary}
-          doj={itemData.item.dateOfJoin}
-        />}
+      // renderItem={itemData =>
+      //   <EmployeeCard
+      //     onSelect={() => {
+      //       navigation.navigate("EditScreen", {
+      //         id: itemData.item.id
+      //       }
+      //       );
+      //     }}
+      //     name={itemData.item.name}
+      //     gender={itemData.item.gender}
+      //     salary={itemData.item.salary}
+      //     doj={itemData.item.dateOfJoin}
+      //   />}
+      renderItem={renderItem}
     />
   </SafeAreaView>
 }
