@@ -2,10 +2,10 @@
 // https://aboutreact.com/react-native-datepicker/
 
 // import React in our code
-import React, { useState } from "react";
-import moment from "moment";
-import { Ionicons } from "@expo/vector-icons";
-import Colors from "../../constants/Colors";
+import React, {useState} from 'react';
+import moment from 'moment';
+import {Ionicons} from '@expo/vector-icons';
+import Colors from '../../constants/Colors';
 
 // import all the components we are going to use
 import {
@@ -16,24 +16,24 @@ import {
   Platform,
   TouchableHighlight,
   TextInput,
-} from "react-native";
+} from 'react-native';
 
 //import DatePicker from the package we installed
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const PhoenixDateTime = (props) => {
   const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState("date");
+  const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
+    setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    if (mode === "time") {
-      props.onChangeDate(mode, moment(selectedDate).format("HH:mm"));
+    if (mode === 'time') {
+      props.onChangeDate(mode, moment(selectedDate).format('HH:mm'));
     } else {
-      props.onChangeDate(mode, moment(selectedDate).format("YYYY-MM-DD"));
+      props.onChangeDate(mode, moment(selectedDate).format('YYYY-MM-DD'));
     }
   };
 
@@ -43,11 +43,11 @@ const PhoenixDateTime = (props) => {
   };
 
   const showDatepicker = () => {
-    showMode("date");
+    showMode('date');
   };
 
   const showTimepicker = () => {
-    showMode("time");
+    showMode('time');
   };
 
   return (
@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     padding: 20,
   },
   datePickerStyle: {
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 2,
     paddingVertical: 5,
-    borderBottomColor: "#000",
+    borderBottomColor: '#000',
     borderBottomWidth: 1,
   },
   datetimecontainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

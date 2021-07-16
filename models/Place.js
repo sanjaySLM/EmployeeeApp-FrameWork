@@ -1,8 +1,6 @@
 class Place {
-    constructor(id,name,imageurl){
-        this.id=id,
-        this.name = name,
-        this.imageurl = imageurl
-    }
+  constructor(id, name, imageurl) {
+    (this.id = id), (this.name = name), (this.imageurl = imageurl);
+  }
 }
 export default Place;

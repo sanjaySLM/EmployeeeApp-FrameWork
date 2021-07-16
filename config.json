@@ -1,16 +1,16 @@
 {
-    "PRODUCTION": {
-        "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
-        "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
-        "URL_VESSEL_IMAGES":"http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
-    },
-    "DEVELOPMENT": {
-        "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
-        "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
-        "URL_VESSEL_IMAGES":"http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
-    },    
-    "THEME_COLORS": {
-      "PRIMARY": "#007bff",
-      "SECONDARY": "#fc3"
-    }
+  "PRODUCTION": {
+    "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
+    "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
+    "URL_VESSEL_IMAGES": "http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
+  },
+  "DEVELOPMENT": {
+    "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
+    "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
+    "URL_VESSEL_IMAGES": "http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
+  },
+  "THEME_COLORS": {
+    "PRIMARY": "#007bff",
+    "SECONDARY": "#fc3"
+  }
 }

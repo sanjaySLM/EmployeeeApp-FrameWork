@@ -1,10 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
+import {useSelector} from 'react-redux';
+import {NavigationContainer} from '@react-navigation/native';
 
-import { PhoenixAppNavigator } from "./AppNavigator";
-import  AuthNavigator from "./AuthNavigator";
-
+import {PhoenixAppNavigator} from './AppNavigator';
+import AuthNavigator from './AuthNavigator';
 
 const MainNavigator = (props) => {
   const isAuth = useSelector((state) => {

@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from '../constants/Colors';
 
-const PlaceItem = props => {
+const PlaceItem = (props) => {
   return (
     <TouchableOpacity style={styles.placeItem}>
-      <Image style={styles.image} source={{ uri:props.image }} />
+      <Image style={styles.image} source={{uri: props.image}} />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.address}>{props.address}</Text>
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     width: 70,
@@ -29,22 +29,22 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#ccc',
     borderColor: Colors.primaryColor,
-    borderWidth: 1
+    borderWidth: 1,
   },
   infoContainer: {
     marginLeft: 30,
     width: 250,
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   title: {
     color: 'black',
     fontSize: 18,
-    marginBottom: 5
+    marginBottom: 5,
   },
   address: {
     color: '#666',
-    fontSize: 16
+    fontSize: 16,
   },
   imagePreview: {
     width: '100%',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#ccc',
-    borderWidth: 1
+    borderWidth: 1,
   },
 });
 

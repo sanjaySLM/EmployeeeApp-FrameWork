@@ -1,10 +1,8 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { WebView } from "react-native-webview";
-import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-
-
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {WebView} from 'react-native-webview';
+import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const test = `
 <!DOCTYPE html>
@@ -20,26 +18,21 @@ const test = `
 </html>
 `;
 
-
-
-
 const HtmlViewer = (props) => {
-
   const webviewRef = React.useRef(null);
   const navigation = useNavigation();
-  const jsonForm = useSelector((state) => { return state.JsonData.jsonData; });
+  const jsonForm = useSelector((state) => {
+    return state.JsonData.jsonData;
+  });
 
   function onMessage(data) {
-    console.log('received', data.nativeEvent.data);
     navigation.navigate({
-      name: "HtmlListScreen",
+      name: 'HtmlListScreen',
     });
   }
 
-
   function injectJs() {
-    const javaData =
-      `try {
+    const javaData = `try {
         window.postMessage(document.cookie)
         Formio.createForm(document.getElementById('formio'), ${jsonForm})
         .then(function (form) {
@@ -49,14 +42,14 @@ const HtmlViewer = (props) => {
         });
     } catch (e) {
         alert(e);
-    }`
+    }`;
     return javaData;
   }
 
   return (
     <View style={styles.container}>
       <WebView
-        originWhitelist={["*"]}
+        originWhitelist={['*']}
         source={{
           baseUrl: 'http://30.30.30.62',
           html: test,
@@ -82,6 +75,6 @@ const styles = StyleSheet.create({
 
 export const screenOptions = (navData) => {
   return {
-    headerTitle: 'Form'
-  }
-}
+    headerTitle: 'Form',
+  };
+};

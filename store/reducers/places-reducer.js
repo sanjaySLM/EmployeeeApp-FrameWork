@@ -1,8 +1,8 @@
-import { ADD_PLACE, SET_PLACES } from './places-actions';
+import {ADD_PLACE, SET_PLACES} from './places-actions';
 import Place from '../models/place';
 
 const initialState = {
-  places: []
+  places: [],
 };
 
 export default (state = initialState, action) => {
@@ -10,17 +10,18 @@ export default (state = initialState, action) => {
     case SET_PLACES:
       return {
         places: action.places.map(
-          pl => new Place(pl.id.toString(), pl.title, pl.imageUri)
-        )
+          (pl) => new Place(pl.id.toString(), pl.title, pl.imageUri),
+        ),
       };
     case ADD_PLACE:
-      const newPlace = new Place(
-        new Date().toString(),
-       action.placeData.title,
-       action.placeData.image
-       );
       return {
-        places: state.places.concat(newPlace)
+        places: state.places.concat(
+          new Place(
+            new Date().toString(),
+            action.placeData.title,
+            action.placeData.image,
+          ),
+        ),
       };
     default:
       return state;

@@ -1,44 +1,41 @@
 // Pushing but not updating - Let me see if it works
 // After training
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {StatusBar} from 'expo-status-bar';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 
-import { Provider } from "react-redux";
-import ReduxThunk from "redux-thunk";
+import {Provider} from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
-import AppLoading from "expo-app-loading";
-import * as Font from "expo-font";
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font';
 
-import Colors from "./constants/Colors";
-import MainNavigator from "./navigation/MainNavigator";
-import EmployeeListReducer from "./store/reducers/EmployeeList";
+import Colors from './constants/Colors';
+import MainNavigator from './navigation/MainNavigator';
+import EmployeeListReducer from './store/reducers/EmployeeList';
 import AuthReducer from './store/reducers/auth';
 import PlaceReducer from './store/reducers/Places';
-import DocumentReducer from "./store/reducers/Document";
-import HtmlReducer from "./store/reducers/html";
-
+import DocumentReducer from './store/reducers/Document';
+import HtmlReducer from './store/reducers/html';
 
 const rootReducer = combineReducers({
   EmployeeList: EmployeeListReducer,
   Auth: AuthReducer,
-  places:PlaceReducer,
+  places: PlaceReducer,
   DocumentList: DocumentReducer,
-  JsonData: HtmlReducer
-
+  JsonData: HtmlReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   });
 };
-
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -51,7 +48,8 @@ export default function App() {
           return setFontLoaded(true);
         }}
         onError={() => {
-          console.log("Error");
+          // eslint-disable-next-line no-console
+          console.log('Error');
         }}
       />
     );
@@ -67,8 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.accentColor,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-

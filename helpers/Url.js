@@ -1,4 +1,4 @@
-import ConfigFile from "../config.json";
+import ConfigFile from '../config.json';
 
 const Config = ConfigFile.PRODUCTION;
 

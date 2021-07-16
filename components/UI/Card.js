@@ -1,11 +1,9 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Colors from "../../constants/Colors";
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import Colors from '../../constants/Colors';
 
 const Card = (props) => {
-  return (
-    <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
-  );
+  return <View style={{...styles.card, ...props.style}}>{props.children}</View>;
 };
 
 const styles = StyleSheet.create({

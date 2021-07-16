@@ -1,40 +1,46 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { FlatList, View, StyleSheet,  Animated, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import HeaderButton from "../../components/UI/HeaderButton";
-import EmployeeCard from "../../components/EmployeeCard"
-import { getEmployeeDetail, searchEmployee } from "../../store/actions/EmployeeList";
-import Colors from "../../constants/Colors";
-import SearchInput from '../../components/UI/SearchInput'
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import React, {useState, useEffect, useCallback} from 'react';
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Animated,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import HeaderButton from '../../components/UI/HeaderButton';
+import EmployeeCard from '../../components/EmployeeCard';
+import {
+  getEmployeeDetail,
+  searchEmployee,
+} from '../../store/actions/EmployeeList';
+import Colors from '../../constants/Colors';
+import SearchInput from '../../components/UI/SearchInput';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-
-const EmployeeListScren = ({ navigation }) => {
-
+const EmployeeListScren = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1)
-  const [isSearching, setIsSearching] = useState(false)
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [isSearching, setIsSearching] = useState(false);
 
-
-
-
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const getEmployeeData = useCallback(async () => {
-    setPage(1)
+    setPage(1);
     setError(null);
     setIsRefreshing(true);
-    setIsSearching(false)
+    setIsSearching(false);
     try {
       await dispatch(getEmployeeDetail());
     } catch (err) {
-      console.log(err.message);
-      setError(err.message)
+      setError(err.message);
     }
     setIsRefreshing(false);
   }, []);
@@ -45,7 +51,6 @@ const EmployeeListScren = ({ navigation }) => {
       setIsLoading(false);
     });
   }, [dispatch]);
-
 
   if (error) {
     return (
@@ -69,12 +74,12 @@ const EmployeeListScren = ({ navigation }) => {
   });
 
   if (!isLoading && employeeData.length === 0) {
-    return <View style={styles.noProductsText}>
-      <Text>No products found.! Do Add </Text>
-    </View>
+    return (
+      <View style={styles.noProductsText}>
+        <Text>No products found.! Do Add </Text>
+      </View>
+    );
   }
-
-
 
   if (isLoading) {
     return (
@@ -85,40 +90,35 @@ const EmployeeListScren = ({ navigation }) => {
   }
 
   const searchHandler = async (searchData) => {
-    setPage(1)
-    setIsSearching(true)
-    setSearch(searchData)
-    setIsLoading(true)
+    setPage(1);
+    setIsSearching(true);
+    setSearch(searchData);
+    setIsLoading(true);
     getSearchData(searchData, page).then(() => {
       setIsLoading(false);
     });
-  }
-
+  };
 
   const getSearchData = async (searchData, page) => {
-    setPage(page + 1)
+    setPage(page + 1);
 
     setError(null);
     setIsRefreshing(true);
     try {
       await dispatch(searchEmployee(searchData, page));
     } catch (err) {
-      console.log(err.message);
-      setError(err.message)
+      setError(err.message);
     }
     setIsRefreshing(false);
   };
 
   const loadMoreHandler = () => {
     if (isSearching) {
-      console.log('before',page)
-      setPage(page + 1)
-      console.log('PageNumberAdded', page)
-      getSearchData(search, page)
-      console.log('SearchCalled')
+      setPage(page + 1);
+      getSearchData(search, page);
     }
-  }
- //////////////////////////////////////////////////
+  };
+  //////////////////////////////////////////////////
 
   const RightActions = (progress, dragX, itemData) => {
     const scale = dragX.interpolate({
@@ -133,38 +133,34 @@ const EmployeeListScren = ({ navigation }) => {
               flex: 1,
               padding: 5,
               backgroundColor: Colors.secondaryColor,
-              justifyContent: "center",
-            }}
-          >
+              justifyContent: 'center',
+            }}>
             <Animated.View
               style={{
-                color: "white",
+                color: 'white',
                 padding: 10,
-                fontWeight: "600",
-                transform: [{ scale }],
-              }}
-            >
+                fontWeight: '600',
+                transform: [{scale}],
+              }}>
               <Text style={styles.actionText}>More...</Text>
             </Animated.View>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <View
             style={{
               flex: 1,
               padding: 5,
               backgroundColor: Colors.tertiaryColor,
-              justifyContent: "center",
-            }}
-          >
+              justifyContent: 'center',
+            }}>
             <Animated.View
               style={{
-                color: "white",
+                color: 'white',
                 padding: 10,
-                fontWeight: "600",
-                transform: [{ scale }],
-              }}
-            >
+                fontWeight: '600',
+                transform: [{scale}],
+              }}>
               <Text style={styles.actionText}>Details</Text>
             </Animated.View>
           </View>
@@ -185,17 +181,15 @@ const EmployeeListScren = ({ navigation }) => {
             flex: 1,
             padding: 10,
             backgroundColor: Colors.secondaryColor,
-            justifyContent: "center",
-          }}
-        >
+            justifyContent: 'center',
+          }}>
           <Animated.View
             style={{
-              color: "white",
+              color: 'white',
               padding: 10,
-              fontWeight: "600",
-              transform: [{ scale }],
-            }}
-          >
+              fontWeight: '600',
+              transform: [{scale}],
+            }}>
             <Text style={styles.actionText}>More...</Text>
           </Animated.View>
         </View>
@@ -213,8 +207,6 @@ const EmployeeListScren = ({ navigation }) => {
     prevOpenedRow = row[index];
   };
 
-
-
   const renderItem = (itemData) => (
     <Swipeable
       ref={(ref) => (row[itemData.index] = ref)}
@@ -226,71 +218,66 @@ const EmployeeListScren = ({ navigation }) => {
       }}
       onSwipeableOpen={() => {
         closeRow(itemData.index);
-      }}
-    >
-          <EmployeeCard
-          onSelect={() => {
-            navigation.navigate("EditScreen", {
-              id: itemData.item.id
-            }
-            );
-          }}
-          name={itemData.item.name}
-          gender={itemData.item.gender}
-          salary={itemData.item.salary}
-          doj={itemData.item.dateOfJoin}
-        />
-     </Swipeable>
+      }}>
+      <EmployeeCard
+        onSelect={() => {
+          navigation.navigate('EditScreen', {
+            id: itemData.item.id,
+          });
+        }}
+        name={itemData.item.name}
+        gender={itemData.item.gender}
+        salary={itemData.item.salary}
+        doj={itemData.item.dateOfJoin}
+      />
+    </Swipeable>
   );
 
-
-
-  return <SafeAreaView style={{ flex: 1 }}>
-    <View style={styles.searchCointainer}>
-      <SearchInput onSearching={searchHandler} /></View>
-    <Text>{page}</Text>
-    <FlatList
-      onEndReachedThreshold={0.1}
-      onEndReached={loadMoreHandler}
-      onRefresh={getEmployeeData}
-      refreshing={isRefreshing}
-      data={isSearching ? employeeDataSearched: employeeData}
-      keyExtractor={item => item.id}
-      // renderItem={itemData =>
-      //   <EmployeeCard
-      //     onSelect={() => {
-      //       navigation.navigate("EditScreen", {
-      //         id: itemData.item.id
-      //       }
-      //       );
-      //     }}
-      //     name={itemData.item.name}
-      //     gender={itemData.item.gender}
-      //     salary={itemData.item.salary}
-      //     doj={itemData.item.dateOfJoin}
-      //   />}
-      renderItem={renderItem}
-    />
-  </SafeAreaView>
-}
-
-
-
-
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.searchCointainer}>
+        <SearchInput onSearching={searchHandler} />
+      </View>
+      <Text>{page}</Text>
+      <FlatList
+        onEndReachedThreshold={0.1}
+        onEndReached={loadMoreHandler}
+        onRefresh={getEmployeeData}
+        refreshing={isRefreshing}
+        data={isSearching ? employeeDataSearched : employeeData}
+        keyExtractor={(item) => item.id}
+        // renderItem={itemData =>
+        //   <EmployeeCard
+        //     onSelect={() => {
+        //       navigation.navigate("EditScreen", {
+        //         id: itemData.item.id
+        //       }
+        //       );
+        //     }}
+        //     name={itemData.item.name}
+        //     gender={itemData.item.gender}
+        //     salary={itemData.item.salary}
+        //     doj={itemData.item.dateOfJoin}
+        //   />}
+        renderItem={renderItem}
+      />
+    </SafeAreaView>
+  );
+};
 
 export const screenOptions = (navData) => {
   return {
-    headerTitle: "Employee List",
+    headerTitle: 'Employee List',
 
     headerRight: () => {
       return (
-        <HeaderButtons HeaderButtonComponent={HeaderButton} >
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item
             title="add"
             iconName="person-add-outline"
             onPress={() => {
               navData.navigation.navigate({
-                name: "EditScreen",
+                name: 'EditScreen',
               });
             }}
           />
@@ -299,26 +286,25 @@ export const screenOptions = (navData) => {
     },
     headerLeft: () => {
       return (
-          <HeaderButtons HeaderButtonComponent={HeaderButton}>
-              <Item
-                  title="Menu"
-                  iconName="md-menu"
-                  onPress={() => {
-                      navData.navigation.toggleDrawer();
-                  }}
-              />
-          </HeaderButtons>
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName="md-menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
       );
-  },
+    },
   };
 };
-
 
 const styles = StyleSheet.create({
   noProductsText: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   searchCointainer: {
@@ -329,9 +315,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
- 
-})
-
-
+});
 
 export default EmployeeListScren;
