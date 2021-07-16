@@ -1,6 +1,6 @@
 import * as Device from 'expo-device';
 import * as React from 'react';
-import { Button, ScrollView, View, StyleSheet, Text,Platform,SafeAreaView  } from 'react-native';
+import {  ScrollView, View, StyleSheet, Text,Platform,SafeAreaView  } from 'react-native';
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import Colors from '../../constants/Colors';

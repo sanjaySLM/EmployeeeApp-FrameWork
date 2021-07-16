@@ -18,14 +18,16 @@ import EmployeeListReducer from "./store/reducers/EmployeeList";
 import AuthReducer from './store/reducers/auth';
 import PlaceReducer from './store/reducers/Places';
 import DocumentReducer from "./store/reducers/Document";
-
+import HtmlReducer from "./store/reducers/html";
 
 
 const rootReducer = combineReducers({
   EmployeeList: EmployeeListReducer,
   Auth: AuthReducer,
   places:PlaceReducer,
-  DocumentList: DocumentReducer
+  DocumentList: DocumentReducer,
+  JsonData: HtmlReducer
+
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

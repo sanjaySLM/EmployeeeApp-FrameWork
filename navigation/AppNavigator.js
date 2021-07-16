@@ -23,9 +23,6 @@ import AddPlaceScreen, {
   screenOptions as AddplacesScreenOptions,
 } from "../screens/places/AddPlaceScreen";
 
-import FormSubmit, {
-  screenOptions as FormSubmitScreenOptions,
-} from "../screens/FormSubmit/FormSubmit";
 
 
 import EmployeeListScreen, {
@@ -48,6 +45,14 @@ import AboutDeviceScreen, {
   screenOptions as AboutDeviceScreenOptions,
 } from "../screens/About/AboutDeviceScreen";
 
+
+import HtmlScreen, {
+  screenOptions as HtmlScreenOptions,
+} from "../screens/Html/htmlScreen";
+
+import HtmlViewer, {
+  screenOptions as formOptions,
+} from "../components/htmlViewer";
 
 
 import { useDispatch } from "react-redux";
@@ -129,7 +134,7 @@ export const DocumentNavigator = props => {
         component={DocumentPicker}
         options={DocumentPickerScreenOptions}
       />
-         <DocumentStackNavigator.Screen
+      <DocumentStackNavigator.Screen
         name="DocumentAdd"
         component={DocumentAddScreen}
         options={DocumentAddScreenOptions}
@@ -164,23 +169,27 @@ export const AboutDeviceNavigator = props => {
 
 
 
-const FormSubmitStackNavigator = createStackNavigator();
 
-export const FormSubmitNavigator = props => {
+const HtmlStackNavigator = createStackNavigator();
+
+export const HtmlNavigator = props => {
 
   return (
-    <FormSubmitStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <FormSubmitStackNavigator.Screen
-        name="Form"
-        component={FormSubmit}
-        options={FormSubmitScreenOptions}
+    <HtmlStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <HtmlStackNavigator.Screen
+        name="HtmlListScreen"
+        component={HtmlScreen}
+        options={HtmlScreenOptions}
       />
 
-    </FormSubmitStackNavigator.Navigator>
+      <HtmlStackNavigator.Screen
+        name="HtmlView"
+        component={HtmlViewer}
+        options={formOptions}
+      />
+    </HtmlStackNavigator.Navigator>
   );
 };
-
-
 
 
 
@@ -277,7 +286,21 @@ export const PhoenixAppNavigator = () => {
           ),
         }}
       />
-        <PhoenixDrawerNavigator.Screen
+
+      <PhoenixDrawerNavigator.Screen
+        name="Forms"
+        component={HtmlNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <Ionicons
+              name={Platform.OS === "android" ? "md-logo-html5" : "md-logo-html5"}
+              size={28}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+      <PhoenixDrawerNavigator.Screen
         name="About Device"
         component={AboutDeviceNavigator}
         options={{
@@ -290,20 +313,6 @@ export const PhoenixAppNavigator = () => {
           ),
         }}
       />
-      <PhoenixDrawerNavigator.Screen
-        name="Forms"
-        component={FormSubmitNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <Ionicons
-              name={Platform.OS === "android" ? "information-circle" : "information-circle"}
-              size={28}
-              color={props.color}
-            />
-          ),
-        }}
-      />
-
     </PhoenixDrawerNavigator.Navigator>
 
 

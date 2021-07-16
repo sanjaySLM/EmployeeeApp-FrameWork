@@ -2,7 +2,7 @@ import { View, Alert, Text, Button } from 'react-native';
 import React, { useState } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
-import { addDocument, getDocumentList } from '../../store/actions/Document'
+import { addDocument } from '../../store/actions/Document'
 import { useDispatch } from 'react-redux';
 import { useNavigation } from "@react-navigation/native";
 

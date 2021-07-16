@@ -1,13 +1,13 @@
 {
     "PRODUCTION": {
-        "URL_API": "http://192.168.43.80/PhoenixEmployee/api/Phoenix",
-        "URL_IMAGES": "http://192.168.43.80/MobileImages/Images",
-        "URL_VESSEL_IMAGES":"http://115.248.135.105/PhoenixTelerik/css/Theme1/images/vessel/"
+        "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
+        "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
+        "URL_VESSEL_IMAGES":"http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
     },
     "DEVELOPMENT": {
-        "URL_API": "http://192.168.43.80/PhoenixEmployee/api/Phoenix",
-        "URL_IMAGES": "http://192.168.43.80/MobileImages/Images",
-        "URL_VESSEL_IMAGES":"http://115.248.135.105/PhoenixTelerik/css/Theme1/images/vessel/"
+        "URL_API": "http://30.30.30.62/PhoenixEmployee/api/Phoenix",
+        "URL_IMAGES": "http://30.30.30.62/MobileImages/Images",
+        "URL_VESSEL_IMAGES":"http://30.30.30.62/PhoenixTelerik/css/Theme1/images/vessel/"
     },    
     "THEME_COLORS": {
       "PRIMARY": "#007bff",
